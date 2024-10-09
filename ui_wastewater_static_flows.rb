@@ -11,11 +11,12 @@ net.transaction_begin
 # dry weather flow variables used to estimated static design flows
 net.row_objects('cams_pipe').each do |pipe|
 	properties = pipe.navigate('properties')
+	
 	count=0
 	area=0.0
 	occupancy=0
 	contributing_area=0.0
-	pipe_length=0.0
+	
 	properties.each do |p|
 		if p.property_type.upcase=='RESIDENTIAL' || p.property_type.upcase=='GREENFIELD'
 			if p.occupancy.nil?
@@ -30,17 +31,10 @@ net.row_objects('cams_pipe').each do |pipe|
 				ca = p.user_number_1 
 			end
 			
-			#if p.length.nil? || p.length == 0
-			#	lm = 1
-			#else
-			#	lm = p.length
-			#end
-			
 			count+=1 							# basic count to test script
 			occupancy+=oc 						# occupancy taken from property layer
 			area+=p.area/10000 					# buidling footprint in Ha					
 			contributing_area+=ca/10000 		# 10m buffer area in Ha
-			pipe_length+=p.length				# pipe length
 			
 		end
 	end
@@ -50,8 +44,6 @@ net.row_objects('cams_pipe').each do |pipe|
 	pipe.user_number_9 =  0.0 					# cumulative area
 	pipe.user_number_10 = contributing_area  	# site area limited to parcel area
 	pipe.user_number_11 = 0.0 					# cumulative contributing_area
-	pipe.user_number_12 = pipe_length 			# pipe length
-	pipe.user_number_13 = 0.0 					# cumulative pipe length
 	
 	pipe.user_number_6_flag = cap_flag
 	pipe.user_number_7_flag = cap_flag
@@ -59,8 +51,6 @@ net.row_objects('cams_pipe').each do |pipe|
 	pipe.user_number_9_flag = cap_flag
 	pipe.user_number_10_flag = cap_flag
 	pipe.user_number_11_flag = cap_flag
-	pipe.user_number_12_flag = cap_flag
-	pipe.user_number_13_flag = cap_flag
 	
 	pipe.write
 end
@@ -70,9 +60,9 @@ workingNodes = Array.new
 net.row_objects('cams_manhole').each do |m|
 	m._seen = false
 	m._occ = 0
-	#m._are = 0
-	#m._caa = 0
-	#m._lth = 0.0
+	m._are = 0
+	m._caa = 0
+	m._lth = 0.0
 	found = 0
 	m.us_links.each do |l|
 		if l.table=='cams_pipe'
@@ -98,27 +88,23 @@ while true
 				if dsl.table=='cams_pipe'
 					dsl.user_number_7 = m._occ + dsl.user_number_6
 					dsl.user_number_7_flag = cap_flag
-					#dsl.user_number_9 = m._are + dsl.user_number_8
-					#dsl.user_number_9_flag = cap_flag
-					#dsl.user_number_11 = m._caa + dsl.user_number_10
-					#dsl.user_number_11_flag = cap_flag
-					#dsl.user_number_13 = m._lth + dsl.user_number_12
-					#dsl.user_number_13_flag = cap_flag					
+					dsl.user_number_9 = m._are + dsl.user_number_8
+					dsl.user_number_9_flag = cap_flag
+					dsl.user_number_11 = m._caa + dsl.user_number_10
+					dsl.user_number_11_flag = cap_flag			
 					dsl.write
 					newNode = dsl.ds_node
 					if newNode 
 						if !newNode._seen
 							newNode._occ = dsl.user_number_7
-							#newNode._are = dsl.user_number_9
-							#newNode._caa = dsl.user_number_11
-							#newNode._lth = dsl.user_number_13
+							newNode._are = dsl.user_number_9
+							newNode._caa = dsl.user_number_11
 							newNode._seen = true
 							workingNodes << newNode
 						else
 							newNode._occ+= dsl.user_number_7
-							#newNode._are+= dsl.user_number_9
-							#newNode._caa+= dsl.user_number_11
-							#newNode._lth+= dsl.user_number_13
+							newNode._are+= dsl.user_number_9
+							newNode._caa+= dsl.user_number_11
 						end
 						newNode._unprocessed-=1
 					end				
