@@ -29,17 +29,17 @@ net.row_objects('cams_pipe').each do |pipe|
 			else
 				ca = p.user_number_1
 			end
-			count+=1						# basic count to test script
-			occupancy+=oc					# occupancy taken from property layer
-			area+=p.area/10000 				# buidling footprint in Ha					
-			contributing_area+=ca/10000 	# 10m buffer area in Ha
+			count+=1  # basic count to test script
+			occupancy+=oc  # occupancy taken from property layer
+			area+=p.area/10000  # buidling footprint in Ha					
+			contributing_area+=ca/10000  # 10m buffer area in Ha
 		end
 	end
 	#pipe.user_number_6 = (occupancy*dwf_person)/86400 	# dry weather flow in l/s
-	pipe.user_number_6 = count 				# dry weather flow in l/s
-	pipe.user_number_7 = 0.0				# zero this for later on
-	pipe.user_number_8 = area				# building footprint area
-	pipe.user_number_9 = contributing_area	# site area limited to parcel area
+	pipe.user_number_6 = count  # dry weather flow in l/s
+	pipe.user_number_7 = 0.0  # zero this for later on
+	pipe.user_number_8 = area  # building footprint area
+	pipe.user_number_9 = contributing_area  # site area limited to parcel area
 	pipe.user_number_6_flag = cap_flag
 	pipe.user_number_7_flag = cap_flag
 	pipe.user_number_8_flag = cap_flag
