@@ -1,0 +1,16 @@
+# ignore folders
+**/exports/
+**/imports/
+#**/superceded/
+
+# ignore files ext
+**/*.log
+#*.zip
+*.recover
+*.ffs
+
+# ignore files
+#*.gitignore
+github_pull.bat
+github_push.bat
+github_notes.txt
