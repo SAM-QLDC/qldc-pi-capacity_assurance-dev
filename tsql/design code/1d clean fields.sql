@@ -1,0 +1,47 @@
+UPDATE [Conduit] IN SCENARIO $scenario SET
+user_number_1 = '', user_number_1_flag = '', 
+user_number_2 = '', user_number_2_flag = '',
+user_number_3 = '', user_number_3_flag = '',
+user_number_4 = '', user_number_4_flag = '',
+user_number_5 = '', user_number_5_flag = '',
+user_number_6 = '', user_number_6_flag = '',
+user_number_7 = '', user_number_7_flag = '',
+user_number_8 = '', user_number_8_flag = '',
+user_number_9 = '', user_number_9_flag = '',
+user_number_10 = '', user_number_10_flag = '';
+
+UPDATE [Subcatchment] IN SCENARIO $scenario SET
+user_number_1 = '', user_number_1_flag = '', 
+user_number_2 = '', user_number_2_flag = '',
+user_number_3 = '', user_number_3_flag = '',
+user_number_4 = '', user_number_4_flag = '',
+user_number_5 = '', user_number_5_flag = '',
+user_number_6 = '', user_number_6_flag = '',
+user_number_7 = '', user_number_7_flag = '',
+user_number_8 = '', user_number_8_flag = '',
+user_number_9 = '', user_number_9_flag = '',
+user_number_10 = '', user_number_10_flag = '';
+
+UPDATE [Polygon] IN SCENARIO $scenario SET
+user_number_1 = '', user_number_1_flag = '', 
+user_number_2 = '', user_number_2_flag = '',
+user_number_3 = '', user_number_3_flag = '',
+user_number_4 = '', user_number_4_flag = '',
+user_number_5 = '', user_number_5_flag = '',
+user_number_6 = '', user_number_6_flag = '',
+user_number_7 = '', user_number_7_flag = '',
+user_number_8 = '', user_number_8_flag = '',
+user_number_9 = '', user_number_9_flag = '',
+user_number_10 = '', user_number_10_flag = '';
+
+UPDATE [Node] IN SCENARIO $scenario SET
+user_number_1 = '', user_number_1_flag = '', 
+user_number_2 = '', user_number_2_flag = '',
+user_number_3 = '', user_number_3_flag = '',
+user_number_4 = '', user_number_4_flag = '',
+user_number_5 = '', user_number_5_flag = '',
+user_number_6 = '', user_number_6_flag = '',
+user_number_7 = '', user_number_7_flag = '',
+user_number_8 = '', user_number_8_flag = '',
+user_number_9 = '', user_number_9_flag = '',
+user_number_10 = '', user_number_10_flag = '';
