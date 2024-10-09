@@ -1,7 +1,7 @@
 # ignore folders
 **/exports/
 **/imports/
-#**/superceded/
+**/superceded/
 
 # ignore files ext
 **/*.log
