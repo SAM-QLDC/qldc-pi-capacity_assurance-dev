@@ -9,14 +9,12 @@ load folder_ruby + '\cmath.rb'
 load folder_ruby + '\bigdecimal\math.rb'
 
 ## parameters
-source = 'John Styles, Krzysztof Tchorzewski, Tony Andrews'
 curyear = Time.now.strftime('%Y').to_i
 flag_calc = 'CAP'
 flag_unsure = 'XX'
 
 ## script
 net=WSApplication.current_network
-WSApplication.use_user_units=false
 net.transaction_begin
 
 ## pipe capacity calcs
@@ -68,7 +66,7 @@ cap = net.row_objects('cams_pipe').each do |cap|
 	end
 
 	if cap['gradient'].nil? || cap['ds_width'].nil? || cap['gradient'] < 0
-		cap['capacity'] = ''
+		cap['capacity'] = 0 # chaneg this in time
 		cap['capacity_flag'] = flag_unsure
 	else
 		# redcue internal diameter where 
@@ -115,10 +113,10 @@ cap = net.row_objects('cams_pipe').each do |cap|
 		
 		# load into IAM
 		cap['capacity'] = flow.round(3)
-		#cap['user_number_5'] = velocity_half.round(3)
+		cap['user_number_5'] = velocity_half.round(3) # self celansing velocities
 		
 		cap['capacity_flag'] = flag_calc
-		#cap['user_number_5_flag'] = flag_calc
+		cap['user_number_5_flag'] = flag_calc
 	end
 cap.write
 end
